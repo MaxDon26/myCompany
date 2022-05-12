@@ -30,7 +30,7 @@ const Users = () => {
       <h1>
         <span className={getClassesBadge(users.length)}>
           {users.length > 0
-            ? `${renderPhrase(users.length)} тусанет с тобой сегодня`
+            ? `${renderPhrase(users.length)} тусанет с тобой сегдня`
             : "Никто с тобой не тусанет"}
         </span>
       </h1>
