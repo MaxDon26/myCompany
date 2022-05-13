@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 import Users from "./components/users";
 import SearchStatus from "./components/searchStatus";
 import api from "./api";
