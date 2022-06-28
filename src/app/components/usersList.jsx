@@ -9,7 +9,7 @@ import { paginate } from "../../utils/paginate.js";
 import api from "../api";
 import PropTypes from "prop-types";
 
-const Users = () => {
+const UsersList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
   const [professions, setProfessions] = useState();
@@ -113,8 +113,8 @@ const Users = () => {
   return "Loading";
 };
 
-Users.propTypes = {
+UsersList.propTypes = {
   users: PropTypes.array
 };
 
-export default Users;
+export default UsersList;
