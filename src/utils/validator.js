@@ -17,9 +17,14 @@ export function validator(data, config) {
         statusValidate = !capitalRegx.test(data);
         break;
       }
-      case "isMinLength": {
-        const is = //g;
-        if (!capitalRegx.test(data)) return config.message;
+      case "isContainDigit": {
+        const digitRegx = /\d+/g;
+        statusValidate = !digitRegx.test(data);
+        break;
+      }
+
+      case "minLength": {
+        statusValidate = data.length < config.value;
         break;
       }
 
