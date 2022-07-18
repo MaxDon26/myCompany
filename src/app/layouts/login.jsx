@@ -76,7 +76,7 @@ const Login = () => {
                 type="submit"
                 disabled={!isDisabled}
               >
-                submit
+                Войти
               </button>
             </form>
           </div>

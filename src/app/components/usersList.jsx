@@ -8,6 +8,7 @@ import _ from "lodash";
 import { paginate } from "../../utils/paginate.js";
 import api from "../api";
 import PropTypes from "prop-types";
+import SearchBar from "./searchBar";
 
 const UsersList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,6 +16,11 @@ const UsersList = () => {
   const [professions, setProfessions] = useState();
   const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
   const pageSize = 8;
+  const [name, setName] = useState("");
+
+  const handleNameChange = ({ target }) => {
+    setName(target.value);
+  };
 
   const [users, setUsers] = useState();
 
@@ -73,6 +79,9 @@ const UsersList = () => {
       setSelectedProf();
     };
 
+    const filtredNameUsers = (str) =>
+      userCrop.filter((user) => user.name.includes(str));
+
     return (
       <div className="d-flex">
         {professions && (
@@ -89,9 +98,10 @@ const UsersList = () => {
         )}
         <div className="d-flex flex-column">
           <SearchStatus length={count} />
+          <SearchBar handleNameChange={handleNameChange} value={name} />
           {count > 0 && (
             <UserTable
-              users={userCrop}
+              users={filtredNameUsers(name) || userCrop}
               selectedSort={sortBy}
               onSort={handleSort}
               onDelete={handleDelete}
