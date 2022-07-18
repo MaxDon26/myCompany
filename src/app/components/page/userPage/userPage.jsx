@@ -1,11 +1,11 @@
 import { React, useEffect, useState } from "react";
 // import query from "query-string";
 import PropTypes from "prop-types";
-import api from "../api";
-import QualitiesList from "./qualitiesList";
+import api from "../../../api";
+import QualitiesList from "../../ui/qualities/qualitiesList";
 import { useNavigate } from "react-router-dom";
 
-const User = ({ userId }) => {
+const UserPage = ({ userId }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   useEffect(() => {
@@ -35,8 +35,8 @@ const User = ({ userId }) => {
   }
 };
 
-User.propTypes = {
+UserPage.propTypes = {
   userId: PropTypes.string.isRequired
 };
 
-export default User;
+export default UserPage;

@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
-import NavBar from "./components/navbar";
+import NavBar from "./components/ui/navbar";
 import RoutesComponent from "./components/Routes";
 
 function App() {

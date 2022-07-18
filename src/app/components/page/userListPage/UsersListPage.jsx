@@ -1,26 +1,22 @@
 /* eslint-disable indent */
 import React, { useState, useEffect } from "react";
-import Pagination from "./pagination";
-import UserTable from "./usersTable";
-import GroupList from "./groupList";
-import SearchStatus from "./searchStatus";
+import Pagination from "../../common/pagination";
+import UserTable from "../../ui/usersTable";
 import _ from "lodash";
-import { paginate } from "../../utils/paginate.js";
-import api from "../api";
+import api from "../../../api";
 import PropTypes from "prop-types";
-import SearchBar from "./searchBar";
+import SearchBar from "../../ui/searchBar";
+import GroupList from "./../../common/groupList";
+import SearchStatus from "./../../ui/searchStatus";
+import { paginate } from "./../../../../utils/paginate";
 
-const UsersList = () => {
+const UsersListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
   const [professions, setProfessions] = useState();
   const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
   const pageSize = 8;
-  const [name, setName] = useState("");
-
-  const handleNameChange = ({ target }) => {
-    setName(target.value);
-  };
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [users, setUsers] = useState();
 
@@ -49,10 +45,11 @@ const UsersList = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedProf]);
+  }, [selectedProf, searchQuery]);
 
   const handleProfessionSelect = (item) => {
     setSelectedProf(item);
+    setSearchQuery("");
   };
 
   const handlePageChange = (pageIndex) => {
@@ -64,7 +61,11 @@ const UsersList = () => {
   };
 
   if (users) {
-    const filteredUsers = selectedProf
+    const filteredUsers = searchQuery
+      ? users.filter((user) =>
+          user.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : selectedProf
       ? users.filter(
           (user) =>
             JSON.stringify(user.profession) === JSON.stringify(selectedProf)
@@ -79,8 +80,10 @@ const UsersList = () => {
       setSelectedProf();
     };
 
-    const filtredNameUsers = (str) =>
-      userCrop.filter((user) => user.name.includes(str));
+    const handleSearchChange = ({ target }) => {
+      setSearchQuery(target.value);
+      clearFilter();
+    };
 
     return (
       <div className="d-flex">
@@ -98,10 +101,13 @@ const UsersList = () => {
         )}
         <div className="d-flex flex-column">
           <SearchStatus length={count} />
-          <SearchBar handleNameChange={handleNameChange} value={name} />
+          <SearchBar
+            handleNameChange={handleSearchChange}
+            value={searchQuery}
+          />
           {count > 0 && (
             <UserTable
-              users={filtredNameUsers(name) || userCrop}
+              users={userCrop}
               selectedSort={sortBy}
               onSort={handleSort}
               onDelete={handleDelete}
@@ -123,8 +129,8 @@ const UsersList = () => {
   return "Loading";
 };
 
-UsersList.propTypes = {
+UsersListPage.propTypes = {
   users: PropTypes.array
 };
 
-export default UsersList;
+export default UsersListPage;
