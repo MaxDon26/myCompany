@@ -23,7 +23,7 @@ const Login = () => {
               <h3 className="mb-4">Регистрация</h3>
               <RegisterForm />
               <p className="mt-2 text-center">
-                У вас есть аккаунт?
+                У вас есть аккаунт?{" "}
                 <a role="button" className="blue" onClick={toggleFormType}>
                   Войти
                 </a>

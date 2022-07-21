@@ -34,12 +34,11 @@ const SelectField = ({
         value={value}
         onChange={onChange}
       >
-        <option disabled value="">
+        <option disabled selected value="">
           {defaultOption}
         </option>
         {optionsArray &&
           optionsArray.map((option) => {
-            console.log(option);
             return (
               <option key={option._id} value={option._id}>
                 {option.name}

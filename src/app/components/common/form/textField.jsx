@@ -8,6 +8,10 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
     return "form-control " + (error ? "is-invalid" : "is-valid");
   };
 
+  const handleChange = ({ target }) => {
+    onChange({ name: target.name, value: target.value });
+  };
+
   const toogleShowPassword = () => {
     setShowPassword((prev) => (prev = !prev));
   };
@@ -19,7 +23,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
           type={showPassword === true ? "text" : type}
           id={name}
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           name={name}
           className={getInputClasses()}
         />
