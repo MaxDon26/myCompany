@@ -106,7 +106,12 @@ const RegisterForm = () => {
         label="Укажите Ваш пол"
         name="sex"
       />
-      <MultiSelectField options={qualities} onChange={handleChange} />
+      <MultiSelectField
+        options={qualities}
+        onChange={handleChange}
+        name="qualities"
+        label="Выберите Ваши качества"
+      />
 
       <button
         className="btn btn-primary w-100 mx-a"
